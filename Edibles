@@ -1,0 +1,51 @@
+import java.util.Scanner;
+
+
+public class Edibles extends Grocery
+{
+
+	private int foodQuality;
+
+	Edibles(String groceryName, String groceryManufacturer, double price, int availableQuantity, int foodQuality){
+
+super ( groceryName,  groceryManufacturer, price,  availableQuantity);
+this.foodQuality = foodQuality;
+
+	}
+
+	Edibles()
+	{
+		
+		
+		Scanner input = new Scanner(System.in);
+
+		do {
+			System.out.println("Type in Grocery Food quality index (1 for low quality-5 for highest quality) -"  );
+			while (!input.hasNextInt()) {
+					System.out.println("That's not a number! Try again. ");
+					input.next(); 
+			}
+			this.foodQuality = input.nextInt();
+	} while (this.foodQuality <= 0 && this.foodQuality>5);
+	System.out.println("Grocery quantity set to  :  " +  this.foodQuality );
+
+
+
+
+		super.showList();
+		System.out.print(",  Grocery Food quality : " +  this.foodQuality + "\n");
+
+
+	}
+	
+	
+	
+	public void showDetails()
+	{
+		
+		super.showList();
+		System.out.print(",  Grocery Food quality : " +  this.foodQuality + "\n");
+	}
+}
+		
+		
