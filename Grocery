@@ -1,0 +1,116 @@
+import java.util.Scanner;
+
+class Grocery implements GroceryOperations{
+	
+	protected String groceryName;
+	protected String groceryManufacturer;
+	protected double price;
+	protected int availableQuantity;
+
+
+
+	Grocery (String groceryName, String groceryManufacturer, double price, int availableQuantity) {
+		this.groceryName=groceryName;
+		this.groceryManufacturer=groceryManufacturer;
+		this.price=price;
+		this.availableQuantity=availableQuantity;
+
+	}
+
+
+	Grocery () {
+
+
+
+		System.out.println("\n ------Adding New Grocery Item");
+
+
+		Scanner input = new Scanner(System.in);
+		System.out.println("Type in Grocery Name -");
+		this.groceryName = input.nextLine();
+		System.out.println("Grocery Name set to :  " + groceryName );
+
+		System.out.println("Type in Grocery Manufacturer Name -"  );
+		this.groceryManufacturer = input.nextLine();
+		System.out.println("Grocery Manufacturer Name set to :  " +  this.groceryManufacturer );
+
+
+
+		do {
+			System.out.println("Type in Grocery Price (numbers only) -"  );
+			while (!input.hasNextDouble()) {
+					System.out.println("Ops, Price can only be positive. You cant sell an Item in a negative price now can you? at least I can't. So please kindly insert positive price (don't overcharge people ;_; )");
+					input.next(); 
+			}
+			this.price = input.nextDouble();
+	} while (this.price <= 0);
+	System.out.println("Grocery price set to :  " +  this.price );
+
+
+		do {
+			System.out.println("Type in Grocery quantity (numbers only) -"  );
+			while (!input.hasNextInt()) {
+					System.out.println("Quantity can only be positive number! I can't sell a product that doesnt exist or exist in a different dimension because of negative quantity.  Please type in proper positive quantity- ");
+					input.next(); 
+			}
+			this.availableQuantity = input.nextInt();
+	} while (this.availableQuantity <= 0);
+	System.out.println("Grocery quantity set to :  " +  this.availableQuantity );
+
+
+
+
+
+
+	}
+
+	@Override
+	public String getGroceryName(){
+		return groceryName;
+	}
+
+	@Override
+	public int getavailableQuantity(){
+		return availableQuantity;
+	}
+
+	@Override
+	public void sell(int amount){
+
+		this.availableQuantity=  this.availableQuantity -  amount;
+
+		
+		if (  availableQuantity <0 ){
+			this.availableQuantity= 0;
+			System.out.println("Insuffucient amount to sell. sold all the stock ("+availableQuantity+") and remaining grocery quantity is : " + 0 );
+		} 
+		else {
+
+			System.out.println("Grocery sold. New available quantity  :  " + availableQuantity);
+
+		}
+		
+	}
+
+	@Override
+	public void restock(int amount){
+		this.availableQuantity= amount + this.availableQuantity;
+
+		System.out.println("Grocery quantity set to :  " + availableQuantity);
+	}
+
+
+	
+	
+	@Override
+	public void showList() {
+
+		System.out.println("=> " +  groceryName + ",  Manufacturer: " +  groceryManufacturer + ",  Price: Tk " +  price + ",  availability: " +  availableQuantity );
+	
+	}
+
+
+
+
+
+}
